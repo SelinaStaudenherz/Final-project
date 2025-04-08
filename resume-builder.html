@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder - Immigrant Support App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-globe-americas fa-2x me-2"></i>
+                    <h1>Immigrant Support App</h1>
+                </div>
+                <div class="language-selector">
+                    <select id="language-select" class="form-select form-select-sm">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="pt">Português</option>
+                        <option value="zh">中文</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="resume-builder.html">Resume Builder</a></li>
+                    <li class="nav-item"><a class="nav-link" href="translator.html">Translator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Financial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Legal Help</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="#">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <h1 class="mb-4">AI Resume Builder</h1>
+                <p class="lead">Create professional resumes tailored to U.S. job markets with AI assistance.</p>
+
+                <div class="row mt-5">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Upload Existing Resume</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Upload your existing resume to get AI feedback and suggestions for improvement.</p>
+                                <form id="resume-upload-form">
+                                    <div class="mb-3">
+                                        <label for="resume-file" class="form-label">Resume File (PDF, DOCX)</label>
+                                        <input class="form-control" type="file" id="resume-file" accept=".pdf,.docx,.doc">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="target-job" class="form-label">Target Job Title (Optional)</label>
+                                        <input type="text" class="form-control" id="target-job" placeholder="e.g., Software Engineer">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="target-industry" class="form-label">Target Industry (Optional)</label>
+                                        <select class="form-select" id="target-industry">
+                                            <option value="">Select Industry (Optional)</option>
+                                            <option value="tech">Technology</option>
+                                            <option value="healthcare">Healthcare</option>
+                                            <option value="finance">Finance</option>
+                                            <option value="education">Education</option>
+                                            <option value="manufacturing">Manufacturing</option>
+                                            <option value="retail">Retail</option>
+                                            <option value="construction">Construction</option>
+                                            <option value="hospitality">Hospitality</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-primary w-100" id="analyze-resume-btn">Analyze My Resume</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">AI Resume Analysis</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="resume-analysis-placeholder" class="text-center py-5">
+                                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                                    <p class="mb-0">Upload your resume to get AI-powered feedback and suggestions.</p>
+                                </div>
+                                <div id="resume-analysis-results" class="d-none">
+                                    <div class="mb-4">
+                                        <h5>Overall Score: <span id="resume-score" class="badge bg-primary">0/100</span></h5>
+                                        <div class="progress">
+                                            <div id="resume-score-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5>Strengths</h5>
+                                                    <ul id="resume-strengths" class="list-group list-group-flush">
+                                                        <!-- Strengths will be inserted here -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5>Areas for Improvement</h5>
+                                                    <ul id="resume-improvements" class="list-group list-group-flush">
+                                                        <!-- Improvements will be inserted here -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5>Section-by-Section Analysis</h5>
+                                        <div class="accordion" id="sectionAnalysis">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                        Contact Information
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#sectionAnalysis">
+                                                    <div class="accordion-body" id="contact-analysis">
+                                                        <!-- Contact analysis will be inserted here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingTwo">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                        Professional Summary
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#sectionAnalysis">
+                                                    <div class="accordion-body" id="summary-analysis">
+                                                        <!-- Summary analysis will be inserted here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingThree">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                                        Work Experience
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#sectionAnalysis">
+                                                    <div class="accordion-body" id="experience-analysis">
+                                                        <!-- Experience analysis will be inserted here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingFour">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                                        Skills
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#sectionAnalysis">
+                                                    <div class="accordion-body" id="skills-analysis">
+                                                        <!-- Skills analysis will be inserted here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5>AI-Generated Improvements</h5>
+                                        <textarea id="ai-suggestions" class="form-control" rows="8" readonly></textarea>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-primary" id="download-report-btn">
+                                            <i class="fas fa-download me-2"></i>Download Report
+                                        </button>
+                                        <button class="btn btn-success" id="apply-changes-btn">
+                                            <i class="fas fa-wand-magic-sparkles me-2"></i>Apply AI Improvements
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Create a New Resume</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Don't have a resume yet? Let our AI help you create a professional resume from scratch.</p>
+                                <a href="#" class="btn btn-primary">Create New Resume</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Immigrant Support App</h5>
+                    <p>Empowering immigrants with AI-powered tools for success.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="jobs.html" class="text-white">Jobs</a></li>
+                        <li><a href="resume-builder.html" class="text-white">Resume Builder</a></li>
+                        <li><a href="translator.html" class="text-white">Translator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: support@immigrantsupportapp.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 Immigrant Support App. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="resume-builder.js"></script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Immigrant Support App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-globe-americas fa-2x me-2"></i>
+                    <h1>Immigrant Support App</h1>
+                </div>
+                <div class="language-selector">
+                    <select id="language-select" class="form-select form-select-sm">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="pt">Português</option>
+                        <option value="zh">中文</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resume-builder.html">Resume Builder</a></li>
+                    <li class="nav-item"><a class="nav-link" href="translator.html">Translator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Financial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Legal Help</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto" id="auth-nav">
+                    <!-- This will be replaced by the auth.js script -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/150" class="rounded-circle img-fluid mb-3" alt="Profile Picture">
+                            <h5>Welcome, <span id="user-first-name">User</span>!</h5>
+                            <p class="text-muted">Member since April 2025</p>
+                            <p><span id="subscription-plan" class="badge bg-secondary">Free</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">Navigation</div>
+                        <div class="list-group list-group-flush" role="tablist">
+                            <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#overview" role="tab">Dashboard</a>
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Profile</a>
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#resume" role="tab">Resume</a>
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#applications" role="tab">Applications</a>
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">Settings</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">Quick Actions</div>
+                        <div class="list-group list-group-flush">
+                            <a href="upload-resume.html" class="list-group-item list-group-item-action">
+                                <i class="fas fa-upload me-2"></i>Upload Resume
+                            </a>
+                            <a href="resume-builder.html" class="list-group-item list-group-item-action">
+                                <i class="fas fa-file-alt me-2"></i>Build Resume
+                            </a>
+                            <a href="jobs.html" class="list-group-item list-group-item-action">
+                                <i class="fas fa-search me-2"></i>Find Jobs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <div class="tab-content">
+                        <!-- Overview Tab -->
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Dashboard Overview</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card border-primary h-100">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-file-alt fa-3x mb-3 text-primary"></i>
+                                                    <h5>Resume Status</h5>
+                                                    <p id="resume-status">You have not uploaded a resume.</p>
+                                                    <a href="upload-resume.html" class="btn btn-sm btn-primary">Manage Resume</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card border-success h-100">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-briefcase fa-3x mb-3 text-success"></i>
+                                                    <h5>Job Applications</h5>
+                                                    <p>You have 0 active applications.</p>
+                                                    <a href="jobs.html" class="btn btn-sm btn-success">Find Jobs</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card border-info h-100">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-language fa-3x mb-3 text-info"></i>
+                                                    <h5>Language Progress</h5>
+                                                    <p>Start learning a new language!</p>
+                                                    <a href="#" class="btn btn-sm btn-info">Learn Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h5>Recommended Jobs</h5>
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Software Developer</h6>
+                                                    <small>1 day ago</small>
+                                                </div>
+                                                <p class="mb-1">Tech Solutions Inc. - New York, NY</p>
+                                                <small>$70,000 - $90,000 per year</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1">Customer Service Representative</h6>
+                                                    <small>2 days ago</small>
+                                                </div>
+                                                <p class="mb-1">Global Services - Remote</p>
+                                                <small>$18 - $22 per hour</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Profile Tab -->
+                        <div class="tab-pane fade" id="profile" role="tabpanel">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Profile Information</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="profile-form">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="profile-first-name" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" id="profile-first-name" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="profile-last-name" class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" id="profile-last-name" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="profile-email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="profile-email" readonly>
+                                                <div class="form-text">Email cannot be changed</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="profile-phone" class="form-label">Phone</label>
+                                                <input type="tel" class="form-control" id="profile-phone">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="profile-language" class="form-label">Preferred Language</label>
+                                            <select class="form-select" id="profile-language">
+                                                <option value="en">English</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label for="profile-city" class="form-label">City</label>
+                                                <input type="text" class="form-control" id="profile-city">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="profile-state" class="form-label">State/Province</label>
+                                                <input type="text" class="form-control" id="profile-state">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="profile-zip" class="form-label">Zip/Postal Code</label>
+                                                <input type="text" class="form-control" id="profile-zip">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="profile-bio" class="form-label">Bio</label>
+                                            <textarea class="form-control" id="profile-bio" rows="3"></textarea>
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Resume Tab -->
+                        <div class="tab-pane fade" id="resume" role="tabpanel">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Resume Management</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- No resume section -->
+                                    <div id="no-resume">
+                                        <div class="text-center p-4">
+                                            <i class="fas fa-file-upload fa-4x mb-3 text-muted"></i>
+                                            <h4>No Resume Uploaded</h4>
+                                            <p class="text-muted">Upload your resume to get personalized job recommendations and AI feedback.</p>
+                                            <a href="upload-resume.html" class="btn btn-primary">
+                                                <i class="fas fa-upload me-2"></i>Upload Resume
+                                            </a>
+                                            <a href="resume-builder.html" class="btn btn-outline-secondary ms-2">
+                                                <i class="fas fa-pen me-2"></i>Create New Resume
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Has resume section -->
+                                    <div id="has-resume" class="d-none">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-file-pdf fa-3x text-danger me-3"></i>
+                                                    <div>
+                                                        <h5 id="resume-name">resume.pdf</h5>
+                                                        <div class="text-muted">
+                                                            <span id="resume-size">123 KB</span> • 
+                                                            Uploaded <span id="resume-date">April 3, 2025</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ms-auto">
+                                                        <button class="btn btn-outline-primary me-2" id="view-resume-btn">
+                                                            <i class="fas fa-eye me-1"></i>View
+                                                        </button>
+                                                        <button class="btn btn-outline-danger" id="delete-resume-btn">
+                                                            <i class="fas fa-trash me-1"></i>Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="mb-3">Upload a New Version</h5>
+                                        <form id="resume-upload-form">
+                                            <div class="mb-3">
+                                                <label for="dashboard-resume-file" class="form-label">Select Resume File</label>
+                                                <input class="form-control" type="file" id="dashboard-resume-file" accept=".pdf,.docx,.doc">
+                                                <div class="form-text">Accepted formats: PDF, Word Documents (.pdf, .doc, .docx)</div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Resume</button>
+                                        </form>
+                                        
+                                        <hr class="my-4">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">AI Resume Analysis</h5>
+                                                        <p class="card-text">Get personalized feedback on your resume from our AI assistant.</p>
+                                                        <a href="resume-builder.html" class="btn btn-success">Get Analysis</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Job Matching</h5>
+                                                        <p class="card-text">Find jobs that match your skills and experience from your resume.</p>
+                                                        <a href="jobs.html" class="btn btn-primary">Find Matching Jobs</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Applications Tab -->
+                        <div class="tab-pane fade" id="applications" role="tabpanel">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Job Applications</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        You haven't applied to any jobs yet. <a href="jobs.html" class="alert-link">Browse available jobs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Tab -->
+                        <div class="tab-pane fade" id="settings" role="tabpanel">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Account Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h5>Change Password</h5>
+                                    <form id="settings-form" class="mb-4">
+                                        <div class="mb-3">
+                                            <label for="current-password" class="form-label">Current Password</label>
+                                            <input type="password" class="form-control" id="current-password" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new-password" class="form-label">New Password</label>
+                                            <input type="password" class="form-control" id="new-password" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="confirm-new-password" class="form-label">Confirm New Password</label>
+                                            <input type="password" class="form-control" id="confirm-new-password" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update Password</button>
+                                    </form>
+                                    
+                                    <hr>
+                                    
+                                    <h5>Delete Account</h5>
+                                    <p class="text-muted">Once you delete your account, there is no going back. Please be certain.</p>
+                                    <button id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Immigrant Support App</h5>
+                    <p>Empowering immigrants with AI-powered tools for success.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="jobs.html" class="text-white">Jobs</a></li>
+                        <li><a href="resume-builder.html" class="text-white">Resume Builder</a></li>
+                        <li><a href="translator.html" class="text-white">Translator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: support@immigrantsupportapp.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 Immigrant Support App. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

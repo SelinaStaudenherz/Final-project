@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Translation - Immigrant Support App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-globe-americas fa-2x me-2"></i>
+                    <h1>Immigrant Support App</h1>
+                </div>
+                <div class="language-selector">
+                    <select id="language-select" class="form-select form-select-sm">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="pt">Português</option>
+                        <option value="zh">中文</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resume-builder.html">Resume Builder</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="translator.html">Translator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Financial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Legal Help</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="#">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <h1 class="mb-4">Real-Time Translation Tool</h1>
+                <p class="lead">AI-based live translation to assist in workplace communication.</p>
+
+                <div class="row mt-5">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Text Translation</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="source-language" class="form-label">From Language:</label>
+                                            <select id="source-language" class="form-select">
+                                                <option value="en">English</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                                <option value="auto" selected>Auto-Detect</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="source-text" class="form-label">Enter Text:</label>
+                                            <textarea id="source-text" class="form-control" rows="8" placeholder="Type or paste text here..."></textarea>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <button id="clear-source-btn" class="btn btn-outline-secondary">
+                                                <i class="fas fa-trash-alt me-2"></i>Clear
+                                            </button>
+                                            <button id="speak-source-btn" class="btn btn-outline-secondary">
+                                                <i class="fas fa-volume-up me-2"></i>Listen
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="target-language" class="form-label">To Language:</label>
+                                            <select id="target-language" class="form-select">
+                                                <option value="en" selected>English</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="target-text" class="form-label">Translation:</label>
+                                            <textarea id="target-text" class="form-control" rows="8" placeholder="Translation will appear here..." readonly></textarea>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <button id="copy-target-btn" class="btn btn-outline-secondary">
+                                                <i class="fas fa-copy me-2"></i>Copy
+                                            </button>
+                                            <button id="speak-target-btn" class="btn btn-outline-secondary">
+                                                <i class="fas fa-volume-up me-2"></i>Listen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <button id="swap-languages-btn" class="btn btn-secondary mx-2">
+                                            <i class="fas fa-exchange-alt me-2"></i>Swap Languages
+                                        </button>
+                                        <button id="translate-btn" class="btn btn-primary mx-2">
+                                            <i class="fas fa-language me-2"></i>Translate
+                                        </button>
+                                        <div class="form-check form-switch mx-3 d-flex align-items-center">
+                                            <input class="form-check-input me-2" type="checkbox" id="auto-translate" checked>
+                                            <label class="form-check-label" for="auto-translate">Auto-Translate</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Speech Translation</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="speech-source-language" class="form-label">From Language:</label>
+                                            <select id="speech-source-language" class="form-select">
+                                                <option value="en" selected>English</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="speech-target-language" class="form-label">To Language:</label>
+                                            <select id="speech-target-language" class="form-select">
+                                                <option value="en">English</option>
+                                                <option value="es" selected>Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="text-center mb-4">
+                                            <div id="recording-indicator" class="d-none">
+                                                <span class="badge bg-danger p-2">Recording...</span>
+                                                <div class="audio-visualizer mt-2">
+                                                    <div class="bar"></div>
+                                                    <div class="bar"></div>
+                                                    <div class="bar"></div>
+                                                    <div class="bar"></div>
+                                                    <div class="bar"></div>
+                                                </div>
+                                            </div>
+                                            <button id="start-recording-btn" class="btn btn-lg btn-danger">
+                                                <i class="fas fa-microphone me-2"></i>Start Recording
+                                            </button>
+                                            <button id="stop-recording-btn" class="btn btn-lg btn-secondary d-none">
+                                                <i class="fas fa-stop me-2"></i>Stop Recording
+                                            </button>
+                                        </div>
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Recognized Speech:</h5>
+                                                <p id="recognized-speech" class="card-text">Press the button and start speaking...</p>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Translation:</h5>
+                                                <p id="speech-translation" class="card-text">Translation will appear here...</p>
+                                                <button id="speak-translation-btn" class="btn btn-outline-secondary">
+                                                    <i class="fas fa-volume-up me-2"></i>Speak Translation
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Conversation Mode</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Enable real-time translation for a two-way conversation.</p>
+                                <div class="row mb-4">
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="person1-language" class="form-label">Person 1 Language:</label>
+                                            <select id="person1-language" class="form-select">
+                                                <option value="en" selected>English</option>
+                                                <option value="es">Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-exchange-alt fa-2x"></i>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="person2-language" class="form-label">Person 2 Language:</label>
+                                            <select id="person2-language" class="form-select">
+                                                <option value="en">English</option>
+                                                <option value="es" selected>Spanish</option>
+                                                <option value="fr">French</option>
+                                                <option value="de">German</option>
+                                                <option value="pt">Portuguese</option>
+                                                <option value="zh">Chinese</option>
+                                                <option value="ar">Arabic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button id="start-conversation-btn" class="btn btn-success btn-lg">
+                                        <i class="fas fa-comments me-2"></i>Start Conversation Mode
+                                    </button>
+                                </div>
+                                <div id="conversation-mode-placeholder" class="text-center mt-4">
+                                    <p class="text-muted">Conversation history will appear here once you start the conversation mode.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Supported Languages</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                English
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Spanish
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                French
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                German
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Portuguese
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Chinese
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Arabic
+                                                <span class="badge bg-primary rounded-pill">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Russian
+                                                <span class="badge bg-secondary rounded-pill">
+                                                    Coming Soon
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Immigrant Support App</h5>
+                    <p>Empowering immigrants with AI-powered tools for success.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="jobs.html" class="text-white">Jobs</a></li>
+                        <li><a href="resume-builder.html" class="text-white">Resume Builder</a></li>
+                        <li><a href="translator.html" class="text-white">Translator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: support@immigrantsupportapp.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 Immigrant Support App. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="translator.js"></script>
+</body>
+</html>
